@@ -4,7 +4,14 @@
     Author     : LuisFer
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="modelo.Persona"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="base.*" %>
+<%
+    String personas =BaseDatos.getInstance().listarPersonas();
+    String[] personasAux = personas.split("%");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,6 +19,14 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form action="editarAux.jsp">
+            <select name="idPersona">
+                <% for (int i = 0; i < personasAux.length; i ++) {%>
+                <option value= <%=personasAux[i].split(";")[1] %>> <%= personasAux[i].split(";")[0] %> </option>
+                <%} %>
+            </select>
+            <input type="submit" value="Editar" />
+        </form>
+        
     </body>
 </html>
